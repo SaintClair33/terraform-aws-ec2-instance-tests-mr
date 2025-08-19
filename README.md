@@ -1,5 +1,5 @@
 # terraform-aws-ec2-instance-tests-{your-initials}
-# comment to validate that it triggers a test in HCP TF and ran tf init
+# comment to validate that it triggers a test in HCP TF and ran tf init again
 
 A Terraform module for creating EC2 instances with integration tests.
 

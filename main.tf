@@ -1,15 +1,19 @@
 terraform {
+  
   cloud {
     organization = "policy-as-code-training"
     workspaces {
       name = "tf-vault-qa-mr"
     }
   }
+  
   required_providers {
     aws = {
       source  = "hashicorp/aws"
+      version = ">= 3.76"
     }
   }
+  
 }
 
 data "aws_ami" "amazon_linux" {
