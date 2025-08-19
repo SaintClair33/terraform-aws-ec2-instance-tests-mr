@@ -1,3 +1,17 @@
+terraform {
+  cloud {
+    organization = "policy-as-code-training"
+    workspaces {
+      name = "tf-vault-qa-mr"
+    }
+  }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+    }
+  }
+}
+
 data "aws_ami" "amazon_linux" {
   most_recent = true
   owners      = ["amazon"]
