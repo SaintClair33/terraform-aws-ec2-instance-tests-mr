@@ -1,4 +1,5 @@
 # terraform-aws-ec2-instance-tests-{your-initials}
+# comment to validate that it triggers a test
 
 A Terraform module for creating EC2 instances with integration tests.
 
