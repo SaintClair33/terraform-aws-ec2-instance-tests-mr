@@ -45,3 +45,24 @@ run "test_instance_count_variable" {
     error_message = "Should create exactly 3 EC2 instances when instance_count = 3"
   }
 }
+
+# tests/integration.tftest.hcl
+run "validate_ec2_instance_tags" {
+  command = apply
+
+  variables {
+    instance_count = 2
+    instance_type  = "t2.micro"
+    subnet_ids     = [run.setup_infrastructure.subnet_id]
+    security_group_ids = [run.setup_infrastructure.security_group_id]
+    tags = {
+      environment = "dev"
+    }
+  }
+
+  # Test that instances have project tag
+  assert {
+    condition     = alltrue([for instance in aws_instance.app : contains(keys(instance.tags), "project")])
+    error_message = "All EC2 instances must have project tag"
+  }
+}
