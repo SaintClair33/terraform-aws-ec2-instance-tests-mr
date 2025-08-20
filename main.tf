@@ -97,32 +97,32 @@ resource "aws_iam_instance_profile" "ec2_profile" {
   role = aws_iam_role.ec2_role.name
 }
 
-resource "aws_instance" "app" {
-  count = var.instance_count
+# resource "aws_instance" "app" {
+#   count = var.instance_count
 
-  ami           = data.aws_ami.amazon_linux.id
-  instance_type = var.instance_type
-  ebs_optimized = true
+#   ami           = data.aws_ami.amazon_linux.id
+#   instance_type = var.instance_type
+#   ebs_optimized = true
 
-  subnet_id              = var.subnet_ids[count.index % length(var.subnet_ids)]
-  vpc_security_group_ids = var.security_group_ids
+#   subnet_id              = var.subnet_ids[count.index % length(var.subnet_ids)]
+#   vpc_security_group_ids = var.security_group_ids
 
-  # Attach IAM role to EC2 instance
-  iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
+#   # Attach IAM role to EC2 instance
+#   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
-  metadata_options {
-    http_endpoint = "enabled"
-    http_tokens   = "required"
-  }
+#   metadata_options {
+#     http_endpoint = "enabled"
+#     http_tokens   = "required"
+#   }
 
-  user_data = <<-EOF
-    #!/bin/bash
-    sudo yum update -y
-    sudo yum install httpd -y
-    sudo systemctl enable httpd
-    sudo systemctl start httpd
-    echo "<html><body><div>Hello, world!</div></body></html>" > /var/www/html/index.html
-    EOF
+#   user_data = <<-EOF
+#     #!/bin/bash
+#     sudo yum update -y
+#     sudo yum install httpd -y
+#     sudo systemctl enable httpd
+#     sudo systemctl start httpd
+#     echo "<html><body><div>Hello, world!</div></body></html>" > /var/www/html/index.html
+#     EOF
 
-  tags = var.tags
-}
+#   tags = var.tags
+# }
