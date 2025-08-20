@@ -1,0 +1,24 @@
+block-list-secret-scan: []
+branch: master
+custom-tool-name: Checkov
+evaluate-variables: true
+external-modules-download-path: .external_modules
+mask: []
+secrets-history-timeout: 12h
+secrets-scan-file-type: []
+summary-position: top
+
+# .checkov.yaml
+directory:
+  - .
+framework:
+  - terraform
+output: cli
+quiet: false
+soft-fail: false
+skip-path:
+  - \tests  # Skip tests directory
+skip-check:
+  - CKV_AWS_8  # Skip EBS encryption check
+  - CKV_AWS_126  # Skip EC2 Monitoring check
+  - CKV2_AWS_41 # Skip Ensure an IAM role is attached to EC2 instance
