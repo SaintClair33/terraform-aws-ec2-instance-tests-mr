@@ -11,11 +11,13 @@ variable "instance_type" {
 variable "subnet_ids" {
   description = "Subnet IDs for EC2 instances"
   type        = list(string)
+  default     = "subnet-12345678"
 }
 
 variable "security_group_ids" {
   description = "Security group IDs for EC2 instances"
   type        = list(string)
+  default     = "sg-12345678"
 }
 
 variable "tags" {
